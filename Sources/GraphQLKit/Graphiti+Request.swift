@@ -27,7 +27,7 @@ extension Request {
 
     private func resolve<RootType: Any>(byQueryRequest data: QueryRequest, graphQLSchema schema: Schema<RootType, Request>, with rootAPI: RootType) -> Future<String> {
         schema.execute(
-            request: data.query,
+            request: data.query.trimmingCharacters(in: .whitespacesAndNewlines),
             root: rootAPI,
             context: self,
             eventLoopGroup: self.eventLoop,
